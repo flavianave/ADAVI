@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <title>Igreja Assembleia de Deus Alcançando Vidas - Ipanema</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Fonte Poppins e FontAwesome -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+  />
+
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background-color: #fff8f0;
+      color: #333;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      padding: 10px 20px;
+      background-color: #fff;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      position: relative;
+    }
+
+    header img {
+      height: 60px;
+      flex-shrink: 0;
+    }
+
+    .titulo-principal {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      color: #f07b22;
+      font-size: 26px;
+      font-weight: 600;
+      white-space: nowrap;
+      user-select: none;
+    }
+
+    nav {
+      background: #f07b22;
+      padding: 15px;
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 16px;
+      transition: background 0.3s, color 0.3s;
+      padding: 8px 16px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    nav a:hover,
+    nav a.active {
+      background-color: white;
+      color: #f07b22;
+    }
+
+    main {
+      flex: 1;
+      max-width: 1000px;
+      margin: 30px auto 60px;
+      padding: 0 20px 40px;
+      background: white;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      border-radius: 12px;
+      min-height: 400px;
+      transition: opacity 0.3s ease;
+    }
+
+    h1.welcome {
+      text-align: center;
+      margin: 20px 0;
+      color: #f07b22;
+      font-size: 28px;
+    }
+
+    /* CARROSSEL */
+    .carousel {
+      position: relative;
+      width: 100%;
+      max-width: 1000px;
+      height: 500px;
+      margin: 0 auto 40px;
+      overflow: hidden;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      border-radius: 10px;
+      background: #000;
+    }
+
+    .carousel img {
+      width: 100%;
+      height: 500px;
+      object-fit: cover;
+      position: absolute;
+      top: 0;
+      left: 0;
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
+      border-radius: 10px;
+    }
+
+    .carousel img.active {
+      opacity: 1;
+      position: relative;
+    }
+
+    .arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 30px;
+      color: white;
+      background-color: rgba(0, 0, 0, 0.4);
+      border: none;
+      cursor: pointer;
+      z-index: 10;
+      padding: 10px;
+      border-radius: 50%;
+      user-select: none;
+      transition: background-color 0.3s;
+    }
+
+    .arrow:hover {
+      background-color: rgba(0, 0, 0, 0.7);
+    }
+
+    .arrow.left {
+      left: 20px;
+    }
+
+    .arrow.right {
+      right: 20px;
+    }
+
+    /* Conteúdos das páginas */
+    section {
+      padding: 20px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    section h2 {
+      color: #f07b22;
+      font-size: 32px;
+      margin-bottom: 20px;
+      text-align: center;
+      font-weight: 700;
+    }
+
+    section p {
+      font-size: 17px;
+      line-height: 1.7;
+      color: #444;
+      text-align: justify;
+      margin-bottom: 20px;
+    }
+
+    section img {
+      display: block;
+      max-width: 100%;
+      border-radius: 12px;
+      margin: 20px auto;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+    }
+
+    .highlight {
+      color: #f07b22;
+      font-weight: 600;
+    }
+
+    /* Calendário Google Agenda responsivo */
+    .calendar-container {
+      position: relative;
+      padding-bottom: 75%; /* 4:3 proporção */
+      height: 0;
+      overflow: hidden;
+      max-width: 1000px;
+      margin: 20px auto 40px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+      border-radius: 12px;
+    }
+
+    .calendar-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border-radius: 12px;
+      border: 0;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background-color: #222;
+      color: #ccc;
+      font-size: 14px;
+      margin-top: auto;
+      user-select: none;
+    }
+
+    /* Responsividade */
+    @media (max-width: 768px) {
+      nav {
+        flex-direction: column;
+        gap: 10px;
+        padding: 10px;
+      }
+
+      h1.welcome {
+        font-size: 22px;
+        padding: 0 10px;
+      }
+
+      header img {
+        height: 50px;
+      }
+
+      .arrow {
+        font-size: 24px;
+        padding: 6px;
+      }
+
+      .carousel {
+        height: 300px;
+      }
+
+      .carousel img {
+        height: 300px;
+      }
+
+      .titulo-principal {
+        font-size: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="FOTOS/logo.png" alt="Logo da igreja" />
+    <h1 class="titulo-principal">Igreja Assembleia de Deus Alcançando Vidas</h1>
+  </header>
+
+  <nav>
+    <a id="nav-inicio" class="active"><i class="fas fa-home"></i> Início</a>
+    <a id="nav-historia"><i class="fas fa-book"></i> História</a>
+    <a id="nav-sobre"><i class="fas fa-users"></i> Sobre Nós</a>
+    <a id="nav-enderecos"><i class="fas fa-map-marker-alt"></i> Nossos Endereços</a>
+    <a id="nav-agenda"><i class="fas fa-calendar-alt"></i> Nossa Agenda</a>
+  </nav>
+
+  <main id="content">
+    <!-- Conteúdo inicial padrão com carrossel -->
+    <h1 class="welcome">Seja bem-vindo à Assembleia de Deus Alcançando Vidas em Ipanema</h1>
+
+    <div class="carousel">
+      <button class="arrow left">&#10094;</button>
+      <button class="arrow right">&#10095;</button>
+
+      <img src="FOTOS/batismo.png" alt="Batismo" class="active" />
+      <img src="FOTOS/consagracao.png" alt="Consagração" />
+      <img src="FOTOS/evento.png" alt="Evento" />
+      <img src="FOTOS/pastor.png" alt="Pastor" />
+      <img src="FOTOS/vice.png" alt="Vice-pastor" />
+    </div>
+  </main>
+
+  <footer>
+    © 2025 Igreja Assembleia de Deus Alcançando Vidas - Todos os direitos reservados
+  </footer>
+
+  <script>
+    const content = document.getElementById('content');
+    const navLinks = document.querySelectorAll('nav a');
+
+    const pages = {
+      inicio: `
+        <h1 class="welcome">Seja bem-vindo à Assembleia de Deus Alcançando Vidas em Ipanema</h1>
+
+        <div class="carousel">
+          <button class="arrow left">&#10094;</button>
+          <button class="arrow right">&#10095;</button>
+
+          <img src="FOTOS/batismo.png" alt="Batismo" class="active" />
+          <img src="FOTOS/consagracao.png" alt="Consagração" />
+          <img src="FOTOS/evento.png" alt="Evento" />
+          <img src="FOTOS/pastor.png" alt="Pastor" />
+          <img src="FOTOS/vice.png" alt="Vice-pastor" />
+        </div>
+      `,
+      historia: `
+        <section>
+          <h2>Nossa História</h2>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia odio vitae vestibulum vestibulum. Cras venenatis euismod malesuada.
+          </p>
+          <p>
+            Nullam quis risus eget urna mollis ornare vel eu leo. Curabitur blandit tempus porttitor. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+          </p>
+          <img src="FOTOS/historia_igreja.jpg" alt="Foto antiga da igreja" />
+          <p>
+            Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Etiam porta sem malesuada magna mollis euismod.
+          </p>
+        </section>
+      `,
+      sobre: `
+        <section>
+          <h2>Sobre Nós</h2>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sed odio dui. Maecenas faucibus mollis interdum.
+          </p>
+          <p>
+            Vestibulum id ligula porta felis euismod semper. Nullam id dolor id nibh ultricies vehicula ut id elit.
+          </p>
+          <img src="FOTOS/equipe_igreja.jpg" alt="Equipe da igreja" />
+          <p>
+            Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Donec ullamcorper nulla non metus auctor fringilla.
+          </p>
+        </section>
+      `,
+      enderecos: `
+        <section>
+          <h2>Nossos Endereços</h2>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent commodo cursus magna, vel scelerisque nisl consectetur et.
+          </p>
+          <ul>
+            <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
+            <li>Praesent commodo cursus magna, vel scelerisque nisl consectetur et.</li>
+            <li>Donec ullamcorper nulla non metus auctor fringilla.</li>
+          </ul>
+          <img src="FOTOS/mapa_igreja.jpg" alt="Mapa dos endereços" />
+          <p>
+            Maecenas sed diam eget risus varius blandit sit amet non magna.
+          </p>
+        </section>
+      `,
+      agenda: `
+        <section>
+          <h2>Nosso Calendário de Eventos</h2>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante venenatis dapibus posuere velit aliquet.
+          </p>
+
+          <h3>Eventos Próximos</h3>
+          <ul>
+            <li><strong>23 de maio, 19h:</strong> Culto de Jovens</li>
+            <li><strong>28 de maio, 10h:</strong> Escola Bíblica Dominical Especial</li>
+            <li><strong>02 de junho, 18h:</strong> Culto de Celebração</li>
+            <li><strong>10 de junho, 15h:</strong> Encontro de Casais</li>
+          </ul>
+
+          <ul>
+            <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
+            <li>Praesent commodo cursus magna, vel scelerisque nisl consectetur et.</li>
+            <li>Donec ullamcorper nulla non metus auctor fringilla.</li>
+            <li>Curabitur blandit tempus porttitor.</li>
+          </ul>
+          <img src="FOTOS/evento_igreja.jpg" alt="Evento da igreja" />
+          <p>
+            Vestibulum id ligula porta felis euismod semper.
+          </p>
+
+          <div class="calendar-container">
+            <iframe 
+              src="https://calendar.google.com/calendar/embed?src=lightlifestyleoficial%40gmail.com&ctz=America%2FSao_Paulo" 
+              frameborder="0" 
+              scrolling="no" 
+              aria-label="Google Calendar"
+            ></iframe>
+          </div>
+        </section>
+      `
+    };
+
+    // Função para trocar conteúdo ao clicar nos links
+    function switchPage(pageName) {
+      // Remove classe active de todos os links
+      navLinks.forEach(link => link.classList.remove('active'));
+      // Adiciona active no link clicado
+      const activeLink = document.getElementById('nav-' + pageName);
+      if (activeLink) activeLink.classList.add('active');
+
+      // Atualiza conteúdo do main
+      content.innerHTML = pages[pageName] || '<p>Página não encontrada.</p>';
+
+      // Se for a página "inicio" ou "agenda", reinicializar carrossel se existir
+      if (pageName === 'inicio' || pageName === 'agenda') {
+        setupCarousel();
+      }
+    }
+
+    // Eventos dos links do menu
+    navLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        const id = link.id.replace('nav-', '');
+        switchPage(id);
+      });
+    });
+
+    // CARROSSEL FUNCIONAL
+    function setupCarousel() {
+      const carousel = document.querySelector('.carousel');
+      if (!carousel) return;
+
+      const slides = carousel.querySelectorAll('img');
+      const leftArrow = carousel.querySelector('.arrow.left');
+      const rightArrow = carousel.querySelector('.arrow.right');
+      let currentIndex = 0;
+      let timer = null;
+
+      function showSlide(index) {
+        slides.forEach((slide, i) => {
+          slide.classList.toggle('active', i === index);
+        });
+      }
+
+      function nextSlide() {
+        currentIndex = (currentIndex + 1) % slides.length;
+        showSlide(currentIndex);
+      }
+
+      function prevSlide() {
+        currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+        showSlide(currentIndex);
+      }
+
+      // Eventos setas
+      rightArrow.onclick = () => {
+        nextSlide();
+        resetTimer();
+      };
+      leftArrow.onclick = () => {
+        prevSlide();
+        resetTimer();
+      };
+
+      // Auto slide a cada 4 segundos
+      function resetTimer() {
+        if (timer) clearInterval(timer);
+        timer = setInterval(nextSlide, 4000);
+      }
+
+      showSlide(currentIndex);
+      resetTimer();
+    }
+
+    // Inicializa o carrossel na página inicial
+    setupCarousel();
+  </script>
+</body>
+</html>
